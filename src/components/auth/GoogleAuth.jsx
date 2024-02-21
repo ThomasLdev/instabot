@@ -1,19 +1,18 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { auth, googleAuthProvider } from "config/firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import NavButton from 'components/ui/navigation/NavButton';
-import PropTypes from 'prop-types';
 
-export const GoogleAuthProvider = (props) => {
+export default function GoogleAuthProvider(prop) {
   const [appUser, setAppUser] = useState(null);
 
   auth.onAuthStateChanged(function (firebaseUser) {
     if (firebaseUser) {
       setAppUser(firebaseUser);
-      props.sendAppUser(firebaseUser);
+      prop.appUser(firebaseUser);
     } else {
       setAppUser(null);
-      props.sendAppUser(null);
+      prop.appUser(null);
     }
   });
 
@@ -36,16 +35,15 @@ export const GoogleAuthProvider = (props) => {
   }
 
   return (
-    <NavButton 
-      onClick={ appUser ? signOutWithGoogle : signInWithGoogle } 
-      icon="user" 
-      text={ appUser ? "Sign out" : "Sign in" } 
-    />
+    <button 
+            onClick={ appUser ? signOutWithGoogle : signInWithGoogle }
+            type="button"
+            className="inline-flex flex-col gap-1 items-center justify-center px-5 hover:bg-alternate group"
+        >
+            <FontAwesomeIcon icon="user" className="text-accent" />
+            <span className="text-sm text-primary group-hover:text-secondary">
+            { appUser ? "Sign out" : "Sign in" }
+            </span>
+        </button>
   );
 }
-
-GoogleAuthProvider.propTypes = {
-  sendAppUser: PropTypes.func.isRequired,
-};
-
-export default GoogleAuthProvider;
