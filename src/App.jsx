@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from 'components/pages/Home';
-import Logs from 'components/pages/Logs';
 import Settings from 'components/pages/Settings';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -13,10 +12,6 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Home />,
-    },
-    {
-        path: '/logs',
-        element: <Logs />,
     },
     {
         path: '/settings',

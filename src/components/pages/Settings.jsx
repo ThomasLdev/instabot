@@ -1,5 +1,10 @@
+import Base from 'components/pages/Base';
+import SettingsForm from 'components/form/SettingsForm';
+
 export default function Settings() {
     return (
-        <h1>Settings</h1>
+        <Base pageTitle="Settings">
+            <SettingsForm />
+        </Base>
     )
 }

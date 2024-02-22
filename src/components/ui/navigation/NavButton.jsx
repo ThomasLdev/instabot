@@ -5,11 +5,11 @@ import { NavLink } from "react-router-dom";
 const NavButton = (prop) => {
     return (
         <NavLink
-            to={`/${prop.path?.toLowerCase()}`}
-            className="inline-flex flex-col gap-1 items-center justify-center px-5 hover:bg-alternate group"
+            to={prop.path}
+            className="inline-flex flex-col gap-1 items-center justify-center px-5 hover:bg-alternate group navbutton"
         >
             <FontAwesomeIcon icon={prop.icon} className="text-accent" />
-            <span className="text-sm text-primary dark:text-gray-400 group-hover:text-secondary">
+            <span className="text-sm text-primary group-hover:text-secondary">
                 {prop.text}
             </span>
         </NavLink>

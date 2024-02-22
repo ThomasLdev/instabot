@@ -6,13 +6,16 @@ import Container from 'components/ui/layout/Container';
 import Navbar from 'components/ui/navigation/Navbar';
 import Loader from 'components/ui/navigation/Loader';
 
-
 export default function Base(props) {
-    const [appUser, loading, error] = useAuthState(auth);
+    const [appUser, loading] = useAuthState(auth);
 
     return (
         <>
-            { appUser &&
+            {loading &&
+                <Loader />
+            }
+
+            {appUser &&
                 <Container>
                     <PageTitle text={props.pageTitle} />
                     <div className="mt-3 mb-3">
@@ -21,11 +24,14 @@ export default function Base(props) {
                 </Container>
             }
 
-            { loading &&
-                <Loader />
+            {!appUser && !loading &&
+                <div className="min-h-screen flex justify-center items-center">
+                    <PageTitle text="Please log in to use instabot" />
+                </div>
+
             }
 
-            <Navbar appUser={appUser} loading={loading} />
+            <Navbar appUser={appUser} />
         </>
     )
 }

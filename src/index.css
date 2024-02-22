@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navbutton.active {
+    background-color: #778DA9;
+}
+
+.navbutton.active span {
+    color: #f1f2ed;
+}
