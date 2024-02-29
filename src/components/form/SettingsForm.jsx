@@ -4,9 +4,11 @@ import { db, auth } from 'config/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import Input from 'components/form/Input';
+import Loader from 'components/ui/navigation/Loader';
 
 export default function SettingsForm() {
     const [appUser, userLoading] = useAuthState(auth);
+    const [isLoading, setIsLoading] = useState(true);
     const [userSettings, setUserSettings] = useState(
         {
             google_drive_token: '',
@@ -33,6 +35,8 @@ export default function SettingsForm() {
             } catch (error) {
                 console.error(error);
             }
+
+            setTimeout(() => setIsLoading(false), 300);
         };
 
         getUserSettings();
@@ -54,6 +58,7 @@ export default function SettingsForm() {
     }
 
     return (
+        isLoading ? <Loader /> :
         <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2 p-6 bg-primary-alternate border border-primary rounded-lg shadow">
                 <h2 className="text-2xl font-semibold text-secondary border-b pb-2">Google Drive</h2>
